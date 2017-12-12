@@ -22,7 +22,10 @@
 <!-- <script src="data/js/bootstrap.min.js"></script> -->
 <script type="text/javascript">
 $(function(){
-    var guankashu = 5;
+    var guankashu = parseInt(sessionStorage.getItem("guankashu"));
+    if(!guankashu){
+      guankashu = 1;
+    }
     var canvas = document.getElementById("tutorial");
     if (canvas.getContext) {
       var ctx = canvas.getContext("2d");
@@ -113,6 +116,15 @@ $(function(){
             }
           }
           clicknum = clicknum+1;
+          if(clicknum>=guankashu){
+            if(guankashu<59){
+              guankashu = guankashu+1;
+            }else{
+              guankashu = 59;
+            }
+            sessionStorage.setItem("guankashu",0);
+            window.location.href=window.location.href;
+          }
       });
     }
 });
